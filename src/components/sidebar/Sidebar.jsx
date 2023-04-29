@@ -27,58 +27,81 @@ const Sidebar = () => {
                 <ul>
                     <p className="title">MAIN</p>
                     <li>
-                        <DashboardIcon className='icon' />
-                        <span>Dashboard</span>
+                        <button>
+                            <DashboardIcon className='icon' />
+                            <span>Dashboard</span>
+                        </button>
                     </li>
                     <p className="title">LISTS</p>
                     <li>
-
-                        <PersonOutlineOutlinedIcon className='icon' />
-                        <span>Users</span>
+                        <button>
+                            <PersonOutlineOutlinedIcon className='icon' />
+                            <span>Users</span>
+                        </button>
                     </li>
                     <li>
-                        <ProductionQuantityLimitsIcon className='icon' />
-                        <span>Products</span>
+                        <button>
+                            <ProductionQuantityLimitsIcon className='icon' />
+                            <span>Products</span>
+                        </button>
                     </li>
                     <li>
-                        <CreditCardOutlinedIcon className='icon' />
-                        <span>Orders</span>
+                        <button>
+                            <CreditCardOutlinedIcon className='icon' />
+                            <span>Orders</span>
+                        </button>
                     </li>
                     <li>
-                        <LocalShippingIcon className='icon' />
-                        <span>Delivery</span>
+                        <button>
+                            <LocalShippingIcon className='icon' />
+                            <span>Delivery</span>
+                        </button>
                     </li>
                     <p className="title">USEFUL</p>
 
                     <li>
-                        <AssessmentIcon className='icon' />
-                        <span>Stats</span>
+                        <button>
+                            <AssessmentIcon className='icon' />
+                            <span>Stats</span>
+                        </button>
                     </li>
                     <li>
-                        <NotificationsNoneIcon className='icon' />
-                        <span>Notifications</span>
+                        <button>
+                            <NotificationsNoneIcon className='icon' />
+                            <span>Notifications</span>
+                        </button>
                     </li>
                     <p className="title">SERVICE</p>
                     <li>
-                        <SettingsSystemDaydreamIcon className='icon' />
-                        <span>System Health</span>
+                        <button>
+                            <SettingsSystemDaydreamIcon className='icon' />
+                            <span>System Health</span>
+                        </button>
                     </li>
                     <li>
-                        <PsychologyOutlinedIcon className='icon' />
-                        <span>Logs</span>
+                        <button>
+                            <PsychologyOutlinedIcon className='icon' />
+                            <span>Logs</span>
+                        </button>
                     </li>
                     <li>
-                        <SettingsSuggestIcon className='icon' />
-                        <span>Settings</span>
+                        <button>
+                            <SettingsSuggestIcon className='icon' />
+                            <span>Settings</span>
+                        </button>
                     </li>
                     <p className="title">USER</p>
                     <li>
-                        <AccountCircleOutlinedIcon className='icon' />
-                        <span>Profile</span>
+                        <button>
+                            <AccountCircleOutlinedIcon className='icon' />
+                            <span>Profile</span>
+                        </button>
                     </li>
                     <li>
-                        <LogoutOutlinedIcon className='icon' />
-                        <span>Logout</span>
+                        <button>
+                            <LogoutOutlinedIcon className='icon' />
+                            <span>Logout</span>
+                        </button>
                     </li>
                 </ul>
             </div>
