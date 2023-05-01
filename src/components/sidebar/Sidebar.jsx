@@ -1,5 +1,3 @@
-import React from 'react'
-import './sidebar.scss'
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
@@ -12,45 +10,48 @@ import PsychologyOutlinedIcon from '@mui/icons-material/PsychologyOutlined';
 import SettingsSuggestIcon from '@mui/icons-material/SettingsSuggest';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
+import { Link } from 'react-router-dom'
 
-
+import './sidebar.scss'
 
 
 const Sidebar = () => {
     return (
         <div className='sidebar'>
             <div className="top">
-                <span className="logo">m_admin</span>
+                <Link to='/' style={{ textDecoration: "none" }}>
+                    <span className="logo">m_admin</span>
+                </Link>
             </div>
             <hr />
             <div className="center">
                 <ul>
                     <p className="title">MAIN</p>
-                    <li>
-                        <button>
+                    <Link to='/' style={{ textDecoration: "none" }}>
+                        <li>
                             <DashboardIcon className='icon' />
                             <span>Dashboard</span>
-                        </button>
-                    </li>
+                        </li>
+                    </Link>
                     <p className="title">LISTS</p>
-                    <li>
-                        <button>
+                    <Link to='/users' style={{ textDecoration: "none" }}>
+                        <li>
                             <PersonOutlineOutlinedIcon className='icon' />
                             <span>Users</span>
-                        </button>
-                    </li>
-                    <li>
-                        <button>
+                        </li>
+                    </Link>
+                    <Link to='/products' style={{ textDecoration: "none" }}>
+                        <li>
                             <ProductionQuantityLimitsIcon className='icon' />
                             <span>Products</span>
-                        </button>
-                    </li>
-                    <li>
-                        <button>
-                            <CreditCardOutlinedIcon className='icon' />
-                            <span>Orders</span>
-                        </button>
-                    </li>
+                        </li>
+                    </Link>
+                    <Link to='/orders' style={{ textDecoration: "none" }}>
+                        <li>
+                                <CreditCardOutlinedIcon className='icon' />
+                                <span>Orders</span>
+                        </li>
+                    </Link>
                     <li>
                         <button>
                             <LocalShippingIcon className='icon' />

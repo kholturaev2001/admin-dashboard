@@ -6,6 +6,7 @@ import List from "./pages/list/List";
 import Single from "./pages/single/Single";
 import New from "./pages/new/New";
 import { productInputs, userInputs } from "./formSource";
+import NotFound from "./components/404/404";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
               <Route path="new" element={<New inputs={productInputs} title='Add New Product' />} />
             </Route>
           </Route>
+          <Route path='*' element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </div>
