@@ -1,5 +1,9 @@
 export const userColumns = [
-  { field: "id", headerName: "ID", width: 70 },
+  { 
+    field: "id", 
+    headerName: "ID", 
+    width: 70,
+  },
   {
     field: "user",
     headerName: "User",
@@ -7,14 +11,28 @@ export const userColumns = [
     renderCell: (params) => {
       return (
         <div className="cellWithImg">
-          <img
-            className="cellImg"
-            src={params.row.img}
-            alt="avatar"
-          />
+          <img className="cellImg" src={params.row.img} alt="avatar" />
           {params.row.userName}
         </div>
       );
+    },
+  },
+  {
+    field: "email",
+    headerName: "Email",
+    width: 230,
+  },
+  {
+    field: "age",
+    headerName: "Age",
+    width: 100,
+  },
+  {
+    field: "status",
+    headerName: "Status",
+    width: 160,
+    renderCell: (params) => {
+      return <div className={`cellWithStatus ${params.row.status}`}>{params.row.status}</div>;
     },
   },
 ];
@@ -48,7 +66,7 @@ export const userRows = [
     id: 4,
     userName: "Marie",
     img: "https://www.novartis.com/sites/novartis_com/files/styles/biography_page_image/public/2021-08/marie-france-tschudin-portrait.jpg.webp?itok=VXmLDINZ",
-    status: "active",
+    status: "pending",
     email: "marie@gmail.com",
     age: 23,
   },
@@ -62,6 +80,54 @@ export const userRows = [
   },
   {
     id: 6,
+    userName: "John",
+    img: "https://johnzeratsky.com/wp-content/uploads/2019/07/JohnZeratsky_web-8510-1.jpg",
+    status: "active",
+    email: "john@gmail.com",
+    age: 50,
+  },
+  {
+    id: 7,
+    userName: "Marie",
+    img: "https://www.novartis.com/sites/novartis_com/files/styles/biography_page_image/public/2021-08/marie-france-tschudin-portrait.jpg.webp?itok=VXmLDINZ",
+    status: "active",
+    email: "marie@gmail.com",
+    age: 23,
+  },
+  {
+    id: 8,
+    userName: "Alex",
+    img: "https://media.licdn.com/dms/image/D4E03AQGZy_4rj-vpsQ/profile-displayphoto-shrink_800_800/0/1673369063548?e=2147483647&v=beta&t=PompcmW-oIB0AAF6pOh-oX0PGCkk2GbYgYsoAZulsEg",
+    status: "passive",
+    email: "alex@gmail.com",
+    age: 45,
+  },
+  {
+    id: 9,
+    userName: "John",
+    img: "https://johnzeratsky.com/wp-content/uploads/2019/07/JohnZeratsky_web-8510-1.jpg",
+    status: "active",
+    email: "john@gmail.com",
+    age: 50,
+  },
+  {
+    id: 10,
+    userName: "Marie",
+    img: "https://www.novartis.com/sites/novartis_com/files/styles/biography_page_image/public/2021-08/marie-france-tschudin-portrait.jpg.webp?itok=VXmLDINZ",
+    status: "pending",
+    email: "marie@gmail.com",
+    age: 23,
+  },
+  {
+    id: 11,
+    userName: "Alex",
+    img: "https://media.licdn.com/dms/image/D4E03AQGZy_4rj-vpsQ/profile-displayphoto-shrink_800_800/0/1673369063548?e=2147483647&v=beta&t=PompcmW-oIB0AAF6pOh-oX0PGCkk2GbYgYsoAZulsEg",
+    status: "passive",
+    email: "alex@gmail.com",
+    age: 45,
+  },
+  {
+    id: 12,
     userName: "John",
     img: "https://johnzeratsky.com/wp-content/uploads/2019/07/JohnZeratsky_web-8510-1.jpg",
     status: "active",

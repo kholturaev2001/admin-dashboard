@@ -1,8 +1,15 @@
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { 
+  AreaChart, 
+  Area, 
+  XAxis, 
+  CartesianGrid, 
+  Tooltip, 
+  ResponsiveContainer 
+} from 'recharts';
 
 import './chart.scss'
 
-const Chart = () => {
+const Chart = ({aspect, title}) => {
 
   const data = [
     { name: "January", Total: 1200 },
@@ -15,8 +22,8 @@ const Chart = () => {
 
   return (
     <div className='chart'>
-      <div className="title">Last 6 Months (Revenue)</div>
-      <ResponsiveContainer width="100%" height={370}>
+      <div className="title">{title}</div>
+      <ResponsiveContainer width="100%" aspect={aspect}>
         <AreaChart width={730} height={250} data={data}
           margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
           <defs>
