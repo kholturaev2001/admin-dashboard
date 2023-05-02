@@ -9,6 +9,11 @@ import New from "./pages/new/New";
 import { productInputs, userInputs } from "./formSource";
 import NotFound from "./components/404/404";
 import { DarkModeContext } from "./context/darkModeContext";
+import Orders from "./pages/orders/Orders";
+import Delivery from "./pages/delivery/Delivery";
+import Stats from "./pages/stats/Stats";
+import Notifications from './pages/notifications/Notifications';
+import Products from "./pages/products/Products";
 
 function App() {
 
@@ -30,12 +35,33 @@ function App() {
               />
             </Route>
             <Route path="products">
-              <Route index element={<List />} />
+              <Route index element={<Products />} />
               <Route path=":productId" element={<Single />} />
               <Route
                 path="new"
                 element={<New inputs={productInputs} title="Add New Product" />}
               />
+            </Route>
+            <Route
+              path="orders"
+            >
+              <Route index element={<Orders />} />
+
+            </Route>
+            <Route
+              path="delivery"
+            >
+              <Route index element={<Delivery />} />
+            </Route>
+            <Route
+              path="stats"
+            >
+              <Route index element={<Stats />} />
+            </Route>
+            <Route
+              path="notifications"
+            >
+              <Route index element={<Notifications />} />
             </Route>
           </Route>
           <Route path="*" element={<NotFound />} />

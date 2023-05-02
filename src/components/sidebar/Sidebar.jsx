@@ -10,7 +10,7 @@ import PsychologyOutlinedIcon from '@mui/icons-material/PsychologyOutlined';
 import SettingsSuggestIcon from '@mui/icons-material/SettingsSuggest';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 import './sidebar.scss'
 import { useContext } from 'react';
@@ -23,59 +23,64 @@ const Sidebar = () => {
     return (
         <div className='sidebar'>
             <div className="top">
-                <Link to='/' style={{ textDecoration: "none" }}>
+                <NavLink to='/' style={{ textDecoration: "none" }}>
                     <span className="logo">m_admin</span>
-                </Link>
+                </NavLink>
             </div>
             <hr />
             <div className="center">
                 <ul>
                     <p className="title">MAIN</p>
-                    <Link to='/' style={{ textDecoration: "none" }}>
+                    <NavLink
+                        to='/'
+                        className={({ isActive }) => isActive ? "isActive" : ""}
+                        style={{ textDecoration: "none" }}
+                    >
                         <li>
                             <DashboardIcon className='icon' />
                             <span>Dashboard</span>
                         </li>
-                    </Link>
+                    </NavLink>
                     <p className="title">LISTS</p>
-                    <Link to='/users' style={{ textDecoration: "none" }}>
+                    <NavLink className={({ isActive }) => isActive ? "isActive" : ""} to='/users' style={{ textDecoration: "none" }}>
                         <li>
                             <PersonOutlineOutlinedIcon className='icon' />
                             <span>Users</span>
                         </li>
-                    </Link>
-                    <Link to='/products' style={{ textDecoration: "none" }}>
+                    </NavLink>
+                    <NavLink className={({ isActive }) => isActive ? "isActive" : ""} to='/products' style={{ textDecoration: "none" }}>
                         <li>
                             <ProductionQuantityLimitsIcon className='icon' />
                             <span>Products</span>
                         </li>
-                    </Link>
-                    <Link to='/orders' style={{ textDecoration: "none" }}>
+                    </NavLink>
+                    <NavLink className={({ isActive }) => isActive ? "isActive" : ""} to='/orders' style={{ textDecoration: "none" }}>
                         <li>
-                                <CreditCardOutlinedIcon className='icon' />
-                                <span>Orders</span>
+                            <CreditCardOutlinedIcon className='icon' />
+                            <span>Orders</span>
                         </li>
-                    </Link>
-                    <li>
-                        <button>
+                    </NavLink>
+                    <NavLink className={({ isActive }) => isActive ? "isActive" : ""} to='/delivery' style={{ textDecoration: "none" }}>
+                        <li>
                             <LocalShippingIcon className='icon' />
                             <span>Delivery</span>
-                        </button>
-                    </li>
+                        </li>
+                    </NavLink>
                     <p className="title">USEFUL</p>
+                    <NavLink className={({ isActive }) => isActive ? "isActive" : ""} to='/stats' style={{ textDecoration: "none" }}>
 
-                    <li>
-                        <button>
+                        <li>
                             <AssessmentIcon className='icon' />
                             <span>Stats</span>
-                        </button>
-                    </li>
-                    <li>
-                        <button>
+                        </li>
+                    </NavLink>
+                    <NavLink className={({ isActive }) => isActive ? "isActive" : ""} to='/notifications' style={{ textDecoration: "none" }}>
+
+                        <li>
                             <NotificationsNoneIcon className='icon' />
                             <span>Notifications</span>
-                        </button>
-                    </li>
+                        </li>
+                    </NavLink>
                     <p className="title">SERVICE</p>
                     <li>
                         <button>
@@ -111,8 +116,8 @@ const Sidebar = () => {
                 </ul>
             </div>
             <div className="bottom">
-                <div className="colorOption" onClick={() => dispatch({type: 'LIGHT'})}></div>
-                <div className="colorOption" onClick={() => dispatch({type: 'DARK'})}></div>
+                <button className="colorOption" onClick={() => dispatch({ type: 'LIGHT' })}></button>
+                <button className="colorOption" onClick={() => dispatch({ type: 'DARK' })}></button>
             </div>
 
         </div>
