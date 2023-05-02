@@ -1,4 +1,5 @@
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useContext } from "react";
 
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
@@ -7,10 +8,14 @@ import Single from "./pages/single/Single";
 import New from "./pages/new/New";
 import { productInputs, userInputs } from "./formSource";
 import NotFound from "./components/404/404";
+import { DarkModeContext } from "./context/darkModeContext";
 
 function App() {
+
+  const { darkMode } = useContext(DarkModeContext)
+  
   return (
-    <div>
+    <div className={"app"}>
       <BrowserRouter>
         <Routes>
           <Route path="/">
@@ -19,15 +24,21 @@ function App() {
             <Route path="users">
               <Route index element={<List />} />
               <Route path=":userId" element={<Single />} />
-              <Route path="new" element={<New inputs={userInputs} title='Add New User' />} />
+              <Route
+                path="new"
+                element={<New inputs={userInputs} title="Add New User" />}
+              />
             </Route>
             <Route path="products">
               <Route index element={<List />} />
               <Route path=":productId" element={<Single />} />
-              <Route path="new" element={<New inputs={productInputs} title='Add New Product' />} />
+              <Route
+                path="new"
+                element={<New inputs={productInputs} title="Add New Product" />}
+              />
             </Route>
           </Route>
-          <Route path='*' element={<NotFound />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </div>
