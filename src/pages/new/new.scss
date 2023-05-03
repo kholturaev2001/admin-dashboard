@@ -71,6 +71,11 @@
             font-weight: bold;
             cursor: pointer;
             margin-top: 10px;
+
+            &:disabled {
+              background:rgb(44, 200, 200);  
+              cursor: not-allowed
+            }
           }
         }
       }

@@ -13,28 +13,32 @@ import {
   uploadBytesResumable,
   getDownloadURL
 } from "firebase/storage";
+import { notification } from 'antd-notifications-messages';
 
 
 import './new.scss'
 import Sidebar from './../../components/sidebar/Sidebar';
 import Navbar from './../../components/navbar/Navbar';
 import { db, auth, storage } from './../../firebase';
+import { useNavigate } from 'react-router-dom';
 
 const New = ({ inputs, title }) => {
   const [file, setFile] = useState('')
   const [data, setData] = useState({})
+  const [percent, setPercent] = useState(null)
+  const navigate = useNavigate()
 
   useEffect(() => {
     const uploadFile = () => {
       const uniqueName = new Date().getTime() + file.name
       const storageRef = ref(storage, uniqueName);
-
       const uploadTask = uploadBytesResumable(storageRef, file);
 
       uploadTask.on('state_changed',
         (snapshot) => {
           const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
           console.log('Upload is ' + progress + '% done');
+          setPercent(progress)
           switch (snapshot.state) {
             case 'paused':
               console.log('Upload is paused');
@@ -61,6 +65,8 @@ const New = ({ inputs, title }) => {
     file && uploadFile()
   }, [file])
 
+  console.log(data)
+
   const handleInput = (e) => {
     const id = e.target.id;
     const value = e.target.value;
@@ -74,21 +80,31 @@ const New = ({ inputs, title }) => {
 
   const handleAdd = async (e) => {
     e.preventDefault()
+    // if (inputs?.length > Object.keys(data).length )  {
+    // if (inputs?.length > Object.keys(data).length )  {
     try {
       const res = await createUserWithEmailAndPassword(
         auth,
         data.email,
         data.password
       )
-
       await setDoc(doc(db, "users", res.user.uid), {
         ...data,
         timeStamp: serverTimestamp()
       });
+      navigate('/users')
 
     } catch (error) {
       console.log("🚀 Error:", error)
     }
+
+    // } else {
+    notification({
+      type: 'error',
+      title: 'Error!',
+      message: `Something went wrong.`
+    });
+    // }
   }
 
   return (
@@ -138,7 +154,7 @@ const New = ({ inputs, title }) => {
                   </div>
                 ))
               }
-              <button type='submit'>Send</button>
+              <button type='submit' disabled={percent !== null && percent < 100} >Send</button>
             </form>
           </div>
         </div>
