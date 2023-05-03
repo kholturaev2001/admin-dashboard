@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useContext } from "react";
 
 import Home from "./pages/home/Home";
@@ -12,56 +12,126 @@ import { DarkModeContext } from "./context/darkModeContext";
 import Orders from "./pages/orders/Orders";
 import Delivery from "./pages/delivery/Delivery";
 import Stats from "./pages/stats/Stats";
-import Notifications from './pages/notifications/Notifications';
+import Notifications from "./pages/notifications/Notifications";
 import Products from "./pages/products/Products";
+import { AuthContext } from "./context/AuthContext";
 
 function App() {
+  const { darkMode } = useContext(DarkModeContext);
 
-  const { darkMode } = useContext(DarkModeContext)
-  
+
+  const { currentUser } = useContext(AuthContext)
+
+
+  const RequireAuth = ({ children }) => {
+    return currentUser ? children : <Navigate to="/login" />;
+  };
+
   return (
     <div className={darkMode ? "app dark" : "app"}>
       <BrowserRouter>
         <Routes>
           <Route path="/">
-            <Route index element={<Home />} />
             <Route path="login" element={<Login />} />
+            <Route
+              index
+              element={
+                <RequireAuth>
+                  <Home />
+                </RequireAuth>
+              }
+            />
             <Route path="users">
-              <Route index element={<List />} />
-              <Route path=":userId" element={<Single />} />
+              <Route
+                index
+                element={
+                  <RequireAuth>
+                    <List />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path=":userId"
+                element={
+                  <RequireAuth>
+                    <Single />
+                  </RequireAuth>
+                }
+              />
               <Route
                 path="new"
-                element={<New inputs={userInputs} title="Add New User" />}
+                element={
+                  <RequireAuth>
+                    <New inputs={userInputs} title="Add New User" />
+                  </RequireAuth>
+                }
               />
             </Route>
             <Route path="products">
-              <Route index element={<Products />} />
-              <Route path=":productId" element={<Single />} />
+              <Route
+                index
+                element={
+                  <RequireAuth>
+                    <Products />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path=":productId"
+                element={
+                  <RequireAuth>
+                    <Single />
+                  </RequireAuth>
+                }
+              />
               <Route
                 path="new"
-                element={<New inputs={productInputs} title="Add New Product" />}
+                element={
+                  <RequireAuth>
+                    <New inputs={productInputs} title="Add New Product" />
+                  </RequireAuth>
+                }
               />
             </Route>
-            <Route
-              path="orders"
-            >
-              <Route index element={<Orders />} />
-
+            <Route path="orders">
+              <Route
+                index
+                element={
+                  <RequireAuth>
+                    <Orders />
+                  </RequireAuth>
+                }
+              />
             </Route>
-            <Route
-              path="delivery"
-            >
-              <Route index element={<Delivery />} />
+            <Route path="delivery">
+              <Route
+                index
+                element={
+                  <RequireAuth>
+                    <Delivery />
+                  </RequireAuth>
+                }
+              />
             </Route>
-            <Route
-              path="stats"
-            >
-              <Route index element={<Stats />} />
+            <Route path="stats">
+              <Route
+                index
+                element={
+                  <RequireAuth>
+                    <Stats />
+                  </RequireAuth>
+                }
+              />
             </Route>
-            <Route
-              path="notifications"
-            >
-              <Route index element={<Notifications />} />
+            <Route path="notifications">
+              <Route
+                index
+                element={
+                  <RequireAuth>
+                    <Notifications />
+                  </RequireAuth>
+                }
+              />
             </Route>
           </Route>
           <Route path="*" element={<NotFound />} />
