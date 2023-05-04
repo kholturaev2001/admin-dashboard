@@ -15,6 +15,7 @@ import Stats from "./pages/stats/Stats";
 import Notifications from "./pages/notifications/Notifications";
 import Products from "./pages/products/Products";
 import { AuthContext } from "./context/AuthContext";
+import Update from "./pages/update/Update";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -63,6 +64,14 @@ function App() {
                 element={
                   <RequireAuth>
                     <New inputs={userInputs} title="Add New User" />
+                  </RequireAuth>
+                }
+              />
+               <Route
+                path="update/:id"
+                element={
+                  <RequireAuth>
+                    <Update inputs={userInputs} title="Add New Product" />
                   </RequireAuth>
                 }
               />

@@ -9,12 +9,11 @@ const firebaseConfig = {
   projectId: "admin-dashboard-de13e",
   storageBucket: "admin-dashboard-de13e.appspot.com",
   messagingSenderId: "254216101577",
-  appId: "1:254216101577:web:2272978f8028c352a2f718"
+  appId: "1:254216101577:web:2272978f8028c352a2f718",
 };
 
 const app = initializeApp(firebaseConfig);
 
 export const db = getFirestore(app);
-export const auth = getAuth()
-export const storage = getStorage (app)
-
+export const auth = getAuth() || {};
+export const storage = getStorage(app);

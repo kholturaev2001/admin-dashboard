@@ -1,46 +1,62 @@
 import { useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
-import { collection, getDocs } from "firebase/firestore";
+import {
+    collection,
+    getDocs,
+    deleteDoc,
+    doc,
+    onSnapshot
+} from "firebase/firestore";
 
 import './datatable.scss'
 import { userColumns } from '../../tabledatasource';
 import { Link } from 'react-router-dom';
 import { db } from '../../firebase';
+import { notification } from 'antd';
 
 const DataTable = () => {
     const [data, setData] = useState([])
 
     useEffect(() => {
-        const fetchData = async () => {
-            let list = []
-            try {
-                const querySnapshot = await getDocs(collection(db, "users"));
-                querySnapshot.forEach((doc) => {
-                    list.push({
-                        id: doc.id,
-                        ...doc.data()
-                    })
-                });
-                setData(list)
-                // console.log(list)
+        const unsub = onSnapshot(collection(db, "users"), (snapShot) => {
+            let list = [];
+            snapShot.docs.forEach((doc) => {
+                list.push({
+                    id: doc.id,
+                    ...doc.data()
+                })
+            })
+            setData(list)
+        },
+            (error) => {
+                console.log(error)
+            });
 
-            } catch (error) {
-                console.log('Error occured:', error)
-            }
+        return () => {
+            unsub()
         }
-        fetchData()
+
     }, [])
 
-    console.log('data is ', data)
 
-    function handleDelete(id) {
+    const handleDelete = async (id) => {
+        try {
+
+            await deleteDoc(doc(db, "users", id));
+            notification["success"]({
+                message: "Deleted!",
+                description: "The user is successfully deleted!",
+            });
+        } catch (error) {
+            console.log("🚀 ~ file: DataTable.jsx:40 ~ handleDelete ~ error:", error)
+        }
         setData(data.filter(item => item.id !== id))
     }
 
     const actionColumn = [
         {
             field: 'action',
-            headerName: 'Action',
+            headerName: 'Actions',
             width: 200,
             renderCell: (params) => (
                 <div className="cellAction">
@@ -48,6 +64,9 @@ const DataTable = () => {
                         <div className="viewButton">View</div>
                     </Link>
                     <button className="deleteButton button" onClick={() => handleDelete(params.row.id)}>Delete</button>
+                    <Link to={`/users/update/${params.row.id}`} style={{ textDecoration: "none" }}>
+                        <div className="editButton">Edit</div>
+                    </Link>
                 </div>
             )
         }
