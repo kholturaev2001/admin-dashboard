@@ -29,7 +29,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { notification } from 'antd';
 
 const Update = ({ inputs, title }) => {
-  console.log("🚀 ~ file: Update.jsx:28 ~ auth:", auth)
   const [file, setFile] = useState('')
   const [percent, setPercent] = useState(null)
   const navigate = useNavigate()
