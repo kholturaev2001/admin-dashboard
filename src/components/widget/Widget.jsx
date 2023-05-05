@@ -1,4 +1,5 @@
 import KeyboardArrowUpOutlinedIcon from '@mui/icons-material/KeyboardArrowUpOutlined';
+import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalanceWalletOutlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
@@ -14,6 +15,7 @@ const Widget = ({ type }) => {
     //temporary
     const [amount, setAmount] = useState(null)
     const [diff, setDiff] = useState(null)
+    console.log("🚀 ~ file: Widget.jsx:17 ~ Widget ~ diff:", diff)
 
     let data;
 
@@ -97,7 +99,7 @@ const Widget = ({ type }) => {
             const prevMonthQuery = query(
                 collection(db, data.query),
                 where('timeStamp', '<=', lastMonth),
-                where('timeStamp', '>', prevMonth   )
+                where('timeStamp', '>', prevMonth)
             )
 
             const lastMonthData = await getDocs(lastMonthQuery);
@@ -117,9 +119,10 @@ const Widget = ({ type }) => {
                 <button className="link button">{data.link}</button>
             </div>
             <div className="right">
-                <div className="percentage positive">
-                    <KeyboardArrowUpOutlinedIcon />
-                    {diff} %
+                <div className={`percentage ${diff < 0 ? "negative" : 'positive'}`}>
+                    {diff < 0 ? <KeyboardArrowDownOutlinedIcon /> : <KeyboardArrowUpOutlinedIcon />}
+
+                    {Math.round(diff)} %
                 </div>
                 {data.icon}
 
