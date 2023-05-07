@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 import {
-  collection,
   doc,
-  addDoc,
   serverTimestamp,
   setDoc
 } from "firebase/firestore";
@@ -13,14 +11,16 @@ import {
   uploadBytesResumable,
   getDownloadURL
 } from "firebase/storage";
+import { useNavigate } from 'react-router-dom';
+import { notification } from 'antd';
 
 
 import './new.scss'
 import Sidebar from './../../components/sidebar/Sidebar';
 import Navbar from './../../components/navbar/Navbar';
 import { db, auth, storage } from './../../firebase';
-import { useNavigate, useParams } from 'react-router-dom';
-import { notification } from 'antd';
+import goBack from '../../images/goBack.svg'
+import GoBackBtn from '../../components/goBackBtn/GoBackBtn';
 
 const New = ({ inputs, title }) => {
   const [file, setFile] = useState('')
@@ -28,8 +28,6 @@ const New = ({ inputs, title }) => {
   const [percent, setPercent] = useState(null)
   const navigate = useNavigate()
 
-  const { id } = useParams()
-  console.log("🚀 ~ file: New.jsx:32 ~ New ~ id:", id)
 
   useEffect(() => {
     const uploadFile = () => {
@@ -123,7 +121,11 @@ const New = ({ inputs, title }) => {
         </div>
         <div className="bottom">
           <div className="left">
+            <div className='goBack'>
+              <GoBackBtn />
+            </div>
             <img
+              className='photo'
               src={
                 file
                   ? URL.createObjectURL(file)

@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import {
     collection,
-    getDocs,
     deleteDoc,
     doc,
     onSnapshot
@@ -13,11 +12,23 @@ import { userColumns } from '../../tabledatasource';
 import { Link } from 'react-router-dom';
 import { db } from '../../firebase';
 import { notification } from 'antd';
+import ConfirmModal from '../modal/ConfirmModal';
+import DeleteIcon from '../../images/icons/DeleteIcon';
+import Loading from '../Loading';
 
 const DataTable = () => {
     const [data, setData] = useState([])
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [currentUserId, setCurrentUserId] = useState(null);
+    const [dataLoading, setDataLoading] = useState(false)
+
+    const handleCancel = () => {
+        setIsModalOpen(false);
+    };
+
 
     useEffect(() => {
+        setDataLoading(true)
         const unsub = onSnapshot(collection(db, "users"), (snapShot) => {
             let list = [];
             snapShot.docs.forEach((doc) => {
@@ -27,6 +38,7 @@ const DataTable = () => {
                 })
             })
             setData(list)
+            setDataLoading(false)
         },
             (error) => {
                 console.log(error)
@@ -40,8 +52,8 @@ const DataTable = () => {
 
 
     const handleDelete = async (id) => {
+        handleCancel()
         try {
-
             await deleteDoc(doc(db, "users", id));
             notification["success"]({
                 message: "Deleted!",
@@ -60,11 +72,25 @@ const DataTable = () => {
             width: 200,
             renderCell: (params) => (
                 <div className="cellAction">
-                    <Link to='/users/test_user' style={{ textDecoration: "none" }}>
+                    <Link
+                        to='/users/test_user'
+                        style={{ textDecoration: "none" }}
+                    >
                         <div className="viewButton">View</div>
                     </Link>
-                    <button className="deleteButton button" onClick={() => handleDelete(params.row.id)}>Delete</button>
-                    <Link to={`/users/update/${params.row.id}`} style={{ textDecoration: "none" }}>
+                    <button
+                        className="deleteButton button"
+                        onClick={() => {
+                            setIsModalOpen(true)
+                            setCurrentUserId(params.row.id)
+                        }}
+                    >
+                        Delete
+                    </button>
+                    <Link
+                        to={`/users/update/${params.row.id}`}
+                        style={{ textDecoration: "none" }}
+                    >
                         <div className="editButton">Edit</div>
                     </Link>
                 </div>
@@ -84,11 +110,20 @@ const DataTable = () => {
 
                 </Link>
             </div>
-            <DataGrid
+            {!dataLoading 
+                ? <DataGrid
                 className='datagrid'
                 rows={data}
                 columns={userColumns.concat(actionColumn)}
                 checkboxSelection
+            /> : <Loading />}
+            <ConfirmModal
+                icon={<DeleteIcon />}
+                title='Delete user'
+                open={isModalOpen}
+                onOk={() => handleDelete(currentUserId)}
+                question='Are you sure you want delete the user?'
+                onCancel={handleCancel}
             />
         </div>
     )

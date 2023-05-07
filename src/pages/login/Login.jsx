@@ -99,11 +99,13 @@ const Login = () => {
         </div>
         <form onSubmit={handleLogin}>
           <input
+            autoComplete='off'
             type="email"
             placeholder='email'
             onChange={e => setEmail(e.target.value)}
           />
           <input
+            autoComplete='off'
             type="password"
             placeholder='password'
             onChange={e => setPassword(e.target.value)}

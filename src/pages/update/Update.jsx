@@ -185,6 +185,7 @@ const Update = ({ inputs, title }) => {
         <div className="bottom">
           <div className="left">
             <img
+              className='photo'
               src={
                 file
                   ? URL.createObjectURL(file)

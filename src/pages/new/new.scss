@@ -22,8 +22,12 @@
       .left {
         flex: 1;
         text-align: center;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 20px;
 
-        img {
+        .photo {
           width: 100px;
           height: 100px;
           border-radius: 50%;
@@ -73,8 +77,8 @@
             margin-top: 10px;
 
             &:disabled {
-              background:rgb(44, 200, 200);  
-              cursor: not-allowed
+              background: rgb(44, 200, 200);
+              cursor: not-allowed;
             }
           }
         }

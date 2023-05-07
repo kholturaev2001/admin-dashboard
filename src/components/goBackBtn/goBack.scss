@@ -1,0 +1,16 @@
+.goBack {
+  button {
+    border-radius: 50%;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    -webkit-box-shadow: -1px 1px 7px -1px rgba(158, 156, 158, 1);
+    -moz-box-shadow: -1px 1px 7px -1px rgba(158, 156, 158, 1);
+    box-shadow: -1px 1px 7px -1px rgba(158, 156, 158, 1);
+    img {
+      width: 30px;
+      height: 30px;
+      object-fit: cover;
+    }
+  }
+}

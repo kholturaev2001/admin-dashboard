@@ -10,15 +10,31 @@ import PsychologyOutlinedIcon from '@mui/icons-material/PsychologyOutlined';
 import SettingsSuggestIcon from '@mui/icons-material/SettingsSuggest';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { useContext, useState } from 'react';
 
 import './sidebar.scss'
-import { useContext } from 'react';
 import { DarkModeContext } from '../../context/darkModeContext';
+import ConfirmModal from '../modal/ConfirmModal';
 
 
 const Sidebar = () => {
     const { dispatch } = useContext(DarkModeContext)
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const navigate = useNavigate()
+
+    const logout = () => {
+        sessionStorage.removeItem('dashboard_user')
+        setIsModalOpen(false);
+        navigate('/login')
+    };
+    const handleCancel = () => {
+        setIsModalOpen(false);
+    };
+
+    const showLogoutModal = () => {
+        setIsModalOpen(true);
+    }
 
     return (
         <div className='sidebar'>
@@ -108,7 +124,7 @@ const Sidebar = () => {
                         </button>
                     </li>
                     <li>
-                        <button>
+                        <button onClick={showLogoutModal}>
                             <LogoutOutlinedIcon className='icon' />
                             <span>Logout</span>
                         </button>
@@ -120,6 +136,14 @@ const Sidebar = () => {
                 <button className="colorOption" onClick={() => dispatch({ type: 'DARK' })}></button>
             </div>
 
+            <ConfirmModal
+                icon={<LogoutOutlinedIcon />}
+                title='Logging out'
+                open={isModalOpen}
+                onOk={logout}
+                question='Are you sure you want to log out?'
+                onCancel={handleCancel}
+            />
         </div>
     )
 }
