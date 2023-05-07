@@ -13,11 +13,13 @@
     "@testing-library/user-event": "^13.5.0",
     "antd": "^5.4.6",
     "firebase": "^9.21.0",
+    "js-copy-to-clipboard": "^0.0.4",
     "react": "^18.2.0",
     "react-circular-progressbar": "^2.1.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.11.0",
     "react-scripts": "5.0.1",
+    "reactjs-copy-to-clipboard": "^0.2.0",
     "recharts": "^2.5.0",
     "sass": "^1.62.1",
     "web-vitals": "^2.1.4"
