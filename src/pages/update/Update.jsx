@@ -187,7 +187,7 @@ const Update = ({ inputs, title }) => {
         <div className="top">
           <h1>{title}</h1>
         </div>
-        {userLoading ? <div className="bottom">
+        {!userLoading ? <div className="bottom">
           <div className="left">
             <GoBackBtn />
             <img
