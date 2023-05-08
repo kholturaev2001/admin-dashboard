@@ -19,7 +19,6 @@ import './new.scss'
 import Sidebar from './../../components/sidebar/Sidebar';
 import Navbar from './../../components/navbar/Navbar';
 import { db, auth, storage } from './../../firebase';
-import goBack from '../../images/goBack.svg'
 import GoBackBtn from '../../components/goBackBtn/GoBackBtn';
 
 const New = ({ inputs, title }) => {
@@ -121,9 +120,7 @@ const New = ({ inputs, title }) => {
         </div>
         <div className="bottom">
           <div className="left">
-            <div className='goBack'>
-              <GoBackBtn />
-            </div>
+            <GoBackBtn />
             <img
               className='photo'
               src={

@@ -27,10 +27,14 @@ import Navbar from './../../components/navbar/Navbar';
 import { db, auth, storage } from './../../firebase';
 import { useNavigate, useParams } from 'react-router-dom';
 import { notification } from 'antd';
+import GoBackBtn from '../../components/goBackBtn/GoBackBtn';
+import AvatarLoading from '../../components/widget/AvatarLoading';
 
 const Update = ({ inputs, title }) => {
   const [file, setFile] = useState('')
   const [percent, setPercent] = useState(null)
+  const [userLoading, setUserLoading] = useState(false)
+
   const navigate = useNavigate()
 
   const { id } = useParams()
@@ -40,13 +44,14 @@ const Update = ({ inputs, title }) => {
 
 
   useEffect(() => {
-
     const getData = async () => {
+      setUserLoading(true)
       const docRef = doc(db, "users", id);
       const docSnap = await getDoc(docRef)
       setData({
         ...docSnap.data()
       })
+      setUserLoading(false)
     }
     return () => {
       getData()
@@ -110,8 +115,8 @@ const Update = ({ inputs, title }) => {
     try {
       if (inputs?.length < Object.keys(inputValues).length
         || inputs?.length === Object.keys(inputValues).length) {
-          /* UPDATING EMAIL & PASSWORD */
-          /* VERSION 1 */
+        /* UPDATING EMAIL & PASSWORD */
+        /* VERSION 1 */
         // await updateEmail(auth.currentUser, inputValues.email).then(() => {
         //   console.log('EMAIL CHANGED')
         // }).catch((error) => {
@@ -127,8 +132,8 @@ const Update = ({ inputs, title }) => {
 
 
 
-          /* UPDATING EMAIL & PASSWORD */
-          /* VERSION 2 */
+        /* UPDATING EMAIL & PASSWORD */
+        /* VERSION 2 */
         // const credential = EmailAuthProvider.credential(
         //   auth.currentUser.email,
         //   // data?.email,
@@ -182,8 +187,9 @@ const Update = ({ inputs, title }) => {
         <div className="top">
           <h1>{title}</h1>
         </div>
-        <div className="bottom">
+        {userLoading ? <div className="bottom">
           <div className="left">
+            <GoBackBtn />
             <img
               className='photo'
               src={
@@ -226,7 +232,7 @@ const Update = ({ inputs, title }) => {
               <button type='submit' disabled={percent !== null && percent < 100} >Send</button>
             </form>
           </div>
-        </div>
+        </div> : <div className="avatarLoading"><AvatarLoading /></div>}
       </div>
     </div>
   )

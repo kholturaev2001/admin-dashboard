@@ -52,7 +52,7 @@ function App() {
                 }
               />
               <Route
-                path=":userId"
+                path=":id"
                 element={
                   <RequireAuth>
                     <Single />

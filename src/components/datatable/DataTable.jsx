@@ -73,7 +73,7 @@ const DataTable = () => {
             renderCell: (params) => (
                 <div className="cellAction">
                     <Link
-                        to='/users/test_user'
+                        to={`/users/${params.row.id}`}
                         style={{ textDecoration: "none" }}
                     >
                         <div className="viewButton">View</div>
@@ -110,13 +110,13 @@ const DataTable = () => {
 
                 </Link>
             </div>
-            {!dataLoading 
+            {!dataLoading
                 ? <DataGrid
-                className='datagrid'
-                rows={data}
-                columns={userColumns.concat(actionColumn)}
-                checkboxSelection
-            /> : <Loading />}
+                    className='datagrid'
+                    rows={data}
+                    columns={userColumns.concat(actionColumn)}
+                    checkboxSelection
+                /> : <Loading />}
             <ConfirmModal
                 icon={<DeleteIcon />}
                 title='Delete user'
